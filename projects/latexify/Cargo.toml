@@ -1,10 +1,10 @@
 [package]
-name = "pex-bibtex"
-version = "0.0.0"
+name = "latexify"
+version = "0.0.1"
 authors = ["Aster <192607617@qq.com>"]
-description = "BibTeX parser and formatter"
+description = "Shared definition for turn a rust object into latex code"
 repository = "https://github.com/ygg-lang/pex-bibtex"
-documentation = "https://docs.rs/pex-bibtex"
+documentation = "https://docs.rs/latexify"
 readme = "Readme.md"
 license = "MPL-2.0"
 edition = "2021"
