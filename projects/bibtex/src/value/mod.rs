@@ -1,14 +1,16 @@
-use std::collections::BTreeMap;
+use indexmap::IndexMap;
+use std::{collections::BTreeMap, str::FromStr};
 
 mod der;
+mod parser;
 mod ser;
 
 #[derive(Debug, PartialEq, Eq, Default)]
 pub struct Bibtex {
     comments: Vec<String>,
     preambles: Vec<String>,
-    const_map: BTreeMap<&'static str, &'static str>,
-    variables: BTreeMap<String, String>,
+    const_map: IndexMap<&'static str, &'static str>,
+    variables: IndexMap<String, String>,
     bibliographies: Vec<Bibliography>,
 }
 
@@ -16,5 +18,5 @@ pub struct Bibtex {
 pub struct Bibliography {
     entry_type: String,
     citation_key: String,
-    tags: BTreeMap<String, String>,
+    tags: IndexMap<String, String>,
 }
