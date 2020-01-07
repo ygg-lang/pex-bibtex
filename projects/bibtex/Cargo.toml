@@ -11,8 +11,8 @@ edition = "2021"
 
 [dependencies]
 indexmap = "1.9.3"
-serde = { version = "1.0.160", features = ["derive"], optional = true }
-pex = "0.0.6"
+serde = { version = "1.0.160", optional = true }
+pex = "0.0.8"
 
 [dev-dependencies]
 
