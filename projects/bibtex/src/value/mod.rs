@@ -1,6 +1,5 @@
 use indexmap::IndexMap;
 use std::{
-    collections::BTreeMap,
     fmt::{Display, Formatter},
     str::FromStr,
 };
