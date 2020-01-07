@@ -1,5 +1,5 @@
 [package]
-name = "pex-bibtex"
+name = "bibtex"
 version = "0.0.0"
 authors = ["Aster <192607617@qq.com>"]
 description = "BibTeX parser and formatter"
@@ -10,8 +10,12 @@ license = "MPL-2.0"
 edition = "2021"
 
 [dependencies]
+indexmap = "1.9.3"
+serde = { version = "1.0.160", features = ["derive"], optional = true }
+pex = "0.0.6"
 
 [dev-dependencies]
 
 [features]
 default = []
+serde = ["dep:serde"]
