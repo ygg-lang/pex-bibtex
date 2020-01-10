@@ -1,0 +1,24 @@
+[package]
+name = "bibtex-web"
+publish = false
+version = "0.0.0"
+authors = ["Aster <192607617@qq.com>"]
+description = "BibTeX parser and formatter"
+repository = "https://github.com/ygg-lang/pex-bibtex"
+documentation = "https://docs.rs/pex-bibtex"
+readme = "Readme.md"
+license = "MPL-2.0"
+edition = "2021"
+
+[dependencies]
+serde_json = "1.0.96"
+
+[dependencies.bibtex]
+#version = "0.1.0"
+features = ["serde"]
+path = "../bibtex"
+
+[dev-dependencies]
+
+[features]
+default = []

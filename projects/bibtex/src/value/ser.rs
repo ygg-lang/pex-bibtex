@@ -1,19 +1,17 @@
 use super::*;
-use std::fmt::Write;
+use serde::{ser::SerializeMap, Serialize, Serializer};
 
-impl Display for Bibliography {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        f.write_char('@')?;
-        f.write_str(&self.entry_type)?;
-        f.write_char('{')?;
-        f.write_str(&self.citation_key)?;
-        if !self.tags.is_empty() {
-            f.write_char(',')?;
-            f.write_char('\n')?;
-        }
+impl Serialize for Bibliography {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let mut ser = serializer.serialize_map(Some(self.tags.len() + 2))?;
+        ser.serialize_entry("entry_type", &self.entry_type)?;
+        ser.serialize_entry("citation_key", &self.citation_key)?;
         for (key, value) in &self.tags {
-            write!(f, "    {} = {{{}}},\n", key, value)?;
+            ser.serialize_entry(key, value)?;
         }
-        write!(f, "}}")
+        ser.end()
     }
 }
