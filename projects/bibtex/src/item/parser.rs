@@ -1,11 +1,5 @@
-// @book{texbook,
-//     author = {Donald E. Knuth},
-//     year = {1986},
-//     title = {The {\TeX} Book},
-//     publisher = {Addison-Wesley Professional}
-// }
-
 use super::*;
+use std::io::ErrorKind;
 
 use pex::{
     helpers::{make_from_str, whitespace},
@@ -15,20 +9,37 @@ use pex::{
 impl FromStr for Bibliography {
     type Err = StopBecause;
 
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
+    fn from_str(s: &str) -> Result<Self, StopBecause> {
         let state = ParseState::new(s.trim_end()).skip(whitespace);
         make_from_str(state, parse_bibliography)
     }
 }
 
 impl Bibliography {
-    pub fn book<S: ToString>(citation: S) -> Self {
-        Self { entry_type: "book".to_string(), citation_key: citation.to_string(), tags: Default::default() }
+    /// Load a bibliography from a file.
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use bibtex::Bibliography;
+    /// # fn main() -> std::io::Result<Bibliography> {
+    /// Bibliography::from_path("tex-book/refs.bib")
+    /// # }
+    /// ```
+    pub fn from_path<P>(path: P) -> std::io::Result<Self>
+    where
+        P: AsRef<Path>,
+    {
+        let s = std::fs::read_to_string(path)?;
+        match s.parse() {
+            Ok(bib) => Ok(bib),
+            Err(e) => Err(std::io::Error::new(ErrorKind::InvalidData, e)),
+        }
     }
 }
 
 /// ```text
-/// bibliography = `@entry_tag { citation_key tags }`
+/// bibliography = @entry_tag { citation_key tags }
 /// tags         = , pair (, pair)+ (,)?
 /// ```
 pub fn parse_bibliography(input: ParseState) -> ParseResult<Bibliography> {

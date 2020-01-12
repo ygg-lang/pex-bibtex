@@ -10,11 +10,11 @@ fn ready() {
 fn test_tex_book() {
     let tex_book1 = "@book{texbook}";
     let bib = Bibliography::from_str(tex_book1).unwrap();
-    assert_eq!(bib, Bibliography::book("texbook"));
+    assert_eq!(bib, Bibliography::new("texbook"));
     //
     let tex_book2 = "@book{texbook,}";
     let bib = Bibliography::from_str(tex_book2).unwrap();
-    assert_eq!(bib, Bibliography::book("texbook"));
+    assert_eq!(bib, Bibliography::new("texbook"));
 
     let texbook = r#"
         @book{texbook,
