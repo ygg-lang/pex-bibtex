@@ -29,7 +29,7 @@ impl<'i, 'de> Visitor<'de> for BibliographyVisitor<'i> {
     type Value = ();
 
     fn expecting(&self, formatter: &mut Formatter) -> std::fmt::Result {
-        formatter.write_str("a bibtex bibliography")
+        formatter.write_str("except a bibtex bibliography")
     }
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
     where

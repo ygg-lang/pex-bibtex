@@ -1,5 +1,4 @@
 use super::*;
-use std::io::ErrorKind;
 
 use pex::{
     helpers::{make_from_str, whitespace},
@@ -12,29 +11,6 @@ impl FromStr for Bibliography {
     fn from_str(s: &str) -> Result<Self, StopBecause> {
         let state = ParseState::new(s.trim_end()).skip(whitespace);
         make_from_str(state, parse_bibliography)
-    }
-}
-
-impl Bibliography {
-    /// Load a bibliography from a file.
-    ///
-    /// # Examples
-    ///
-    /// ```no_run
-    /// use bibtex::Bibliography;
-    /// # fn main() -> std::io::Result<Bibliography> {
-    /// Bibliography::from_path("tex-book/refs.bib")
-    /// # }
-    /// ```
-    pub fn from_path<P>(path: P) -> std::io::Result<Self>
-    where
-        P: AsRef<Path>,
-    {
-        let s = std::fs::read_to_string(path)?;
-        match s.parse() {
-            Ok(bib) => Ok(bib),
-            Err(e) => Err(std::io::Error::new(ErrorKind::InvalidData, e)),
-        }
     }
 }
 

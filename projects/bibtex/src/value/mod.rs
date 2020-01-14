@@ -16,10 +16,10 @@ mod ser;
 /// # Examples
 ///
 /// ```
-/// use bibtex::Bibtex;
+/// use bibtex::BibTeX;
 /// ```
 #[derive(Debug, PartialEq, Eq)]
-pub struct Bibtex {
+pub struct BibTeX {
     comments: Vec<String>,
     preambles: Vec<String>,
     const_map: IndexMap<&'static str, &'static str>,
@@ -27,7 +27,7 @@ pub struct Bibtex {
     bibliographies: Vec<Bibliography>,
 }
 
-impl Default for Bibtex {
+impl Default for BibTeX {
     fn default() -> Self {
         Self {
             comments: Vec::new(),
