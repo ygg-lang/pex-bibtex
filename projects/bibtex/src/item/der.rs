@@ -3,6 +3,7 @@ use serde::{
     de::{Error, MapAccess, Visitor},
     Deserialize, Deserializer,
 };
+use std::str::FromStr;
 
 pub struct BibliographyVisitor<'i> {
     ptr: &'i mut Bibliography,

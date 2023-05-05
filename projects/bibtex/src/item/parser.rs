@@ -1,9 +1,9 @@
 use super::*;
-
 use pex::{
     helpers::{make_from_str, whitespace},
     ParseResult, ParseState, StopBecause,
 };
+use std::str::FromStr;
 
 impl FromStr for Bibliography {
     type Err = StopBecause;

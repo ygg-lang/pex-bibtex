@@ -1,8 +1,5 @@
 use indexmap::IndexMap;
-use std::{
-    fmt::{Display, Formatter, Write},
-    str::FromStr,
-};
+use std::fmt::{Display, Formatter, Write};
 
 #[cfg(feature = "serde")]
 mod der;
