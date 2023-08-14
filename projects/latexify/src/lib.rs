@@ -12,6 +12,8 @@ mod for_std;
 // noinspection SpellCheckingInspection
 /// A trait for LaTeX representation.
 pub trait Latexify {
+    /// The context of LaTeX representation.
+    type Context;
     /// Write LaTeX representation to the formatter.
     ///
     /// # Examples
@@ -26,7 +28,7 @@ pub trait Latexify {
     /// # Ok(())
     /// # }
     /// ```
-    fn fmt<W: Write>(&self, f: &mut W) -> core::fmt::Result;
+    fn fmt<W: Write>(&self, c: &Self::Context, f: &mut W) -> core::fmt::Result;
     /// Get the LaTeX string of raw object.
     ///
     /// # Examples
@@ -35,9 +37,9 @@ pub trait Latexify {
     /// use latexify::Latexify;
     /// 0.to_latex(); // "0"
     /// ```
-    fn to_latex(&self) -> String {
+    fn to_latex(&self, config: &Self::Context) -> String {
         let mut s = String::new();
-        Latexify::fmt(self, &mut s).unwrap();
+        Latexify::fmt(self, config, &mut s).unwrap();
         s
     }
 }
