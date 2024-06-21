@@ -1,7 +1,9 @@
 use crate::Bibliography;
 use indexmap::IndexMap;
+use std::fmt::{Display, Formatter};
 
 mod der;
+mod display;
 mod parser;
 mod ser;
 
